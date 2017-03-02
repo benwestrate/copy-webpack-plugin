@@ -20,7 +20,7 @@ function CopyWebpackPlugin(patterns = [], options = {}) {
     const debugLevelIndex = debugLevels.indexOf(options.debug);
     function log(msg, level) {
         if (level === 0) {
-            msg = `WARNING - ${msg}`; 
+            msg = `WARNING - ${msg}`;
         } else {
             level = level || 1;
         }
@@ -88,7 +88,7 @@ function CopyWebpackPlugin(patterns = [], options = {}) {
             .finally(callback);
         });
 
-        compiler.plugin('after-emit', (compilation, cb) => {
+        compiler.plugin('done', (compilation, cb) => {
             debug('starting after-emit');
             const callback = () => {
                 debug('finishing after-emit');
@@ -118,7 +118,7 @@ function CopyWebpackPlugin(patterns = [], options = {}) {
             callback();
         });
     };
-    
+
     return {
         apply
     };
